@@ -10,7 +10,6 @@ username = "test"
 password = "test123"
 
 # returns whether host responds to ping or not
-# returns whether host responds to ping or not
 # CF: fping gives a cleaner output here, I will block comment the 3.6 equivalent
 def ping(host):
     os.system("fping %s > %s.txt" % (host, host))
