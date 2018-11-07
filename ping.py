@@ -10,18 +10,23 @@ username = "test"
 password = "test123"
 
 # returns whether host responds to ping or not
+# CF: fping gives a cleaner output here, I will block comment the 3.6 equivalent
 def ping(host):
-    os.system("ping -c 1 " + host + " > " + host + ".txt")
-    pingFile = open(host + ".txt", 'r')
-    os.system("rm " + host + ".txt")
-    for num, line in enumerate(pingFile):
-        if num == 1:
-            if 'Unreachable' in line:
-                print 'Unreachable'
-                return False
-            else:
-                print 'Reachable'
-                return True
+    os.system("fping %s > %s.txt" % (host, host))
+    pingFile = open("%s.txt" % host, 'r')
+    # os.system("rm %s.txt" % host)
+
+    if 'alive' in pingFile.read():
+        print "%s Alive on ICMP" % host
+        return True
+    else:
+        print "%s Unavailable via ICMP" % host
+        return False
+
+    # if 'alive' in subprocess.call(["fping", host], encoding="ascii", stdout=subprocess.PIPE).stdout:
+    #   return True
+    # else:
+    #   return False
 
 # Runs an nmap scan on the host and parses using nmapParse.py
 def scan(host):
