@@ -22,7 +22,6 @@ def scanParse(scan):
                 text("Seconds: " + scan['uptime']['seconds'] + "\n")
             with tag('p'):
                 text("Last Boot: " + scan['uptime']['lastboot'] + "\n")
-
             with tag('h2'):
                 text("Addresses:" + "\n")
             with tag('p'):
@@ -70,11 +69,16 @@ def scanParse(scan):
                 for osclass in osmatch['osclass']:
                     with tag('p'):
                         text("----------" + "\n")
+                    with tag('p'):
                         text("Family: " + osclass['osfamily'] + "\n")
+                    with tag('p'):
                         text("Vendor: " + osclass['vendor'] + "\n")
+                    with tag('p'):
                         text("Type: " + osclass['type'] + "\n")
+                    with tag('p'):
                         text("OS Generation: " + osclass['osgen'] + "\n")
+                    with tag('p'):
                         text("Accuracy: " + osclass['accuracy'] + "\n")
 
-f = open('test.html', 'w+')
-f.write(doc.getvalue())
+    f = open('test.html', 'w+')
+    f.write(doc.getvalue())

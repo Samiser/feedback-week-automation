@@ -3,7 +3,7 @@ import subprocess
 import sys
 import nmap
 import cPickle as pickle
-import nmapParse
+import nmapParseWeb
 
 # rpcclient credentials
 username = "test"
@@ -32,7 +32,11 @@ def testRpc(host):
 def scan(host):
     scanner = nmap.PortScanner()
     scanner.scan(host, arguments="-sV -O --script vuln")
+    print "Nmap scan complete"
+    os.system("date")
     nmapParseWeb.scanParse(scanner[host])
+    print "Nmap scan parsed"
+    os.system("date")
 
 # Uses rpcclient to enumerate for dom users
 # Writes list of users to host/users.txt
